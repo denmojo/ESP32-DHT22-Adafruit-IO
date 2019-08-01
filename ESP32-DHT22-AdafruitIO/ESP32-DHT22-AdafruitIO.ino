@@ -5,7 +5,8 @@ and a ESP32 Dev Kit board from http://bit.ly/2LM2lix
 
 By AD6DM Dennis 7/29/2019
 */
-
+#include <WiFiClientSecure.h>
+#include <ssl_client.h>
 
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
@@ -14,12 +15,12 @@ By AD6DM Dennis 7/29/2019
 #include "DHT.h"
 
 #define AIO_SERVER      "io.adafruit.com"
-#define AIO_SERVERPORT  1883
+#define AIO_SERVERPORT  8883 // SSL Encrypted Port, for unencrypted use 1883 and switch to WifiClient instead of WifiClientSecure
 #define AIO_USERNAME  "[yourusername]"
 #define AIO_KEY  "[youradafruitio_key]"
 #define DHTPIN 4
 #define DHTTYPE DHT22
-WiFiClient client;
+WiFiClientSecure client;
 
 Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
 
@@ -89,4 +90,3 @@ void loop()
     }
 
 }
-
